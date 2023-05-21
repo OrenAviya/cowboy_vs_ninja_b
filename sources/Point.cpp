@@ -33,7 +33,10 @@ Point Point:: moveTowards(Point source ,Point destination , double distance){
         return Point(new_X, new_Y);
     }
 
-}   
+} 
+void Point::print(){
+cout<<" (" + to_string(this->getX()) + "," + to_string(this->getY()) + ")\n";
+}
 
 double Point::getY(){
     return this->y;

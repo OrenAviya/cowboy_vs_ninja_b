@@ -9,6 +9,6 @@ class OldNinja: public Ninja{
     public:
      // constructors:
     OldNinja(const char* name , Point location  );
-     string print();
+    string print() override;
 };
 

@@ -6,6 +6,19 @@ Character(name , location, 110), num_of_bullet(6){
     this->type =1;
 }
 
+Cowboy::Cowboy(const Cowboy& other)
+    : Character(other), num_of_bullet(other.num_of_bullet) {
+
+}
+
+// Move constructor implementation
+Cowboy::Cowboy(Cowboy&& other) noexcept
+    : Character(std::move(other)), num_of_bullet(other.num_of_bullet) {
+   
+}
+
+
+
 int Cowboy:: getNumBullet(){
     return this->num_of_bullet;
 }
@@ -45,15 +58,33 @@ void Cowboy::reload(){
 }
 
 
-Cowboy Cowboy ::operator =(Cowboy *some){
-   Cowboy c1 = Cowboy(some->getName() , some->getLocation() );
-   c1.setHitpoints(some->getHitPoints());
-   c1.setNumBullet(some->getNumBullet());
-    return c1;
+Cowboy& Cowboy::operator=(const Cowboy& some) {
+    if (this != &some) {
+        Character::operator=(some);
+        num_of_bullet = some.num_of_bullet;
+    }
+    return *this;
+}
+
+
+// Move assignment operator implementation
+Cowboy& Cowboy::operator=(Cowboy&& other) noexcept {
+    if (this != &other) {
+        Character::operator=(std::move(other));
+        num_of_bullet = other.num_of_bullet;
+    }
+    return *this;
 }
 
 string Cowboy:: print(){
-string res = "cowboy " + string(getName()) + " with "+to_string(getHitPoints())+" hit points. place in point: "
-+" (" + to_string(this->getLocation().getX()) + "," + to_string(this->getLocation().getY()) + ")\n";
+    string res = "C: ";
+if(isAlive()){
+    res+= string(getName()) + " with "+to_string(getHitPoints())+" hit points. place in point: ";
+    (this->getLocation().print());
+}
+else{
+res+= "("+ string(getName()) +")" + "place in point: "
++ " (" + to_string(this->getLocation().getX()) + "," + to_string(this->getLocation().getY()) + ")\n";
+}
 return res;
 }

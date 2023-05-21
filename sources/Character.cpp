@@ -17,6 +17,37 @@ Name(name) , Location(location) , Hit_points(hitPoints) , type(0), inTeam(false)
 Character::Character(): 
 Name(NULL) , Location(Point()) , Hit_points(0), type(0){}
 
+
+    // Copy assignment operator
+    Character& Character ::operator=(const Character& other) {
+        if (this != &other) {
+            Name = other.Name;
+            Hit_points = other.Hit_points;
+            inTeam = other.inTeam;
+            Location = other.Location;
+            type = other.type;
+        }
+        return *this;
+    }
+
+    // Move assignment operator
+    Character& Character ::operator=(Character&& other) noexcept {
+        if (this != &other) {
+            delete[] Name;
+            Name = (other.Name);
+            Hit_points = other.Hit_points;
+            inTeam = other.inTeam;
+            Location = (other.Location);
+            type = other.type;
+
+            other.Name = nullptr;
+            other.Hit_points = 0;
+            other.inTeam = false;
+            other.type = 0;
+        }
+        return *this;
+    }
+
 const char* Character :: getName(){
     return this->Name;
 }
@@ -41,17 +72,13 @@ void Character::hit(int number){
     this->setHitpoints(this->getHitPoints() - number);
 }
 
-Character Character ::operator =(Character *some){
-   Character c1 = Character(some->getName() , some->getLocation(), some->getHitPoints() );
-    return c1;
-}
 int Character::getType(){
     return this->type;
 }
-string Character :: print(){
-    string print = "some character";
-    return print;
-} 
+// string Character :: print(){
+//     string print = "some character";
+//     return print;
+// } 
 
 /************************************************************************************/
 

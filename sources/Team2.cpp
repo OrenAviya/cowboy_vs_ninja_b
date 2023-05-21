@@ -8,7 +8,7 @@
 
    void Team2 :: print(){
     for (size_t i =0 ; i < this->size ; i++){
-        cout << warriors[i]->print() << " , ";
+        cout << warriors.at(i)->print() << " , ";
     }
     cout<<"\n";
     }
@@ -63,8 +63,8 @@
         if(enemyTeam->stillAlive() == 0)
             return;
 
-        if (warriors[i]->getType() == 1){
-            Cowboy* co = static_cast<Cowboy*>(warriors[i]);
+        if (warriors.at(i)->getType() == 1){
+            Cowboy* co = static_cast<Cowboy*>(warriors.at(i));
             if (co->isAlive() && co->getNumBullet()>0){
                 co->shoot(victim);
             }
@@ -72,8 +72,8 @@
                 co->reload();
             }
         }
-        else if (warriors[i]->getType() == 2){
-            Ninja* nin  = static_cast<Ninja*>(warriors[i]);
+        else if (warriors.at(i)->getType() == 2){
+            Ninja* nin  = static_cast<Ninja*>(warriors.at(i));
             if (nin->isAlive() && nin->distance(victim)<1){
                 nin->slash(victim);
             }

@@ -11,6 +11,6 @@ class TrainedNinja: public Ninja{
     public:
      // constructors:
     TrainedNinja(const char* name, Point location  );
-     string print();
+     string print() override;
 
 };

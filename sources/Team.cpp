@@ -22,6 +22,28 @@ Team::Team (Character *leader){
     leader->inTeam = true;
     }
     
+    // Copy assignment operator implementation
+Team& Team::operator=(const Team& other) {
+    if (this != &other) {
+        warriors = other.warriors;
+        leader = other.leader;
+        size = other.size;
+        // Additional copy assignment implementation, if needed
+    }
+    return *this;
+}
+
+
+// Move assignment operator implementation
+Team& Team::operator=(Team&& other) noexcept {
+    if (this != &other) {
+        warriors = (other.warriors);
+        leader = (other.leader);
+        size = (other.size);
+    }
+    return *this;
+}
+
   void Team::print()
 {
     for (size_t i =0 ; i < this->size ; i++){
@@ -59,7 +81,8 @@ void Team:: add(Character *warr){
     if (warr->getType()==1 && !insert_success){
     for (size_t i=this->size-1 ; i>=0; i--){
         if (warriors[i]->getType()!=2 && warriors[i+1] == nullptr){
-            warriors[i+1] = warr;
+            warriors[i+1]
+ = warr;
             size++;
             insert_success = true;
             warr->inTeam = true;
@@ -70,7 +93,8 @@ void Team:: add(Character *warr){
             for (size_t j=this->size ; j>i+1; j--){
                 warriors[j] = warriors[j-1];
             }
-            warriors[i+1]= warr;
+            warriors[i+1]
+= warr;
             insert_success = true;
             warr->inTeam = true;
             size++;
@@ -82,7 +106,7 @@ void Team:: add(Character *warr){
         //if the cowboy not inserted to team yet - all the team is ningas
         for (size_t i=this->size ; i>0; i--){
             // move each character one to right.
-            warriors[i] = warriors[i-1];
+            warriors[i] = warriors.at(i-1);
         }
         warriors[0] = warr;
         insert_success = true;
@@ -165,7 +189,7 @@ void Team:: attack(Team *enemyTeam){
 int Team::stillAlive(){
     int res =0; 
     for (size_t i =(this->size) ; i >0; i--){
-            if( this->warriors[i-1]->isAlive() == true)
+            if( this->warriors.at(i-1)->isAlive() == true)
                 res++;
     }
     return res;
