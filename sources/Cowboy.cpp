@@ -1,5 +1,8 @@
 #include "Cowboy.hpp"
-
+#include <cmath>
+#include <iomanip>
+#include <sstream>
+using namespace  std;
 
 Cowboy::Cowboy(const char* name , Point location ):
 Character(name , location, 110), num_of_bullet(6){
@@ -76,15 +79,19 @@ Cowboy& Cowboy::operator=(Cowboy&& other) noexcept {
     return *this;
 }
 
-string Cowboy:: print(){
-    string res = "C: ";
-if(isAlive()){
-    res+= string(getName()) + " with "+to_string(getHitPoints())+" hit points. place in point: ";
-    (this->getLocation().print());
-}
-else{
-res+= "("+ string(getName()) +")" + "place in point: "
-+ " (" + to_string(this->getLocation().getX()) + "," + to_string(this->getLocation().getY()) + ")\n";
-}
-return res;
+string Cowboy::print() {
+    std::ostringstream oss;
+    oss << "C: ";
+    float x = (this->getLocation().getX());
+    float y = (this->getLocation().getY());
+    
+    if (isAlive()) {
+        oss << getName() << " with " << getHitPoints() << " hit points. Place in point: ("
+            << std::fixed << std::setprecision(2) << x << "," << y << ")\n";
+    } else {
+        oss << "(" << getName() << ") Place in point: ("
+            << std::fixed << std::setprecision(2) << x << "," << y << ")\n";
+    }
+
+    return oss.str();
 }

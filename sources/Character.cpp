@@ -2,7 +2,9 @@
 #include "Character.hpp"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <cmath>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 namespace ariel{}
@@ -118,15 +120,18 @@ Ninja::Ninja(){}
 }
  
 string Ninja::print() {
-    string print = "N: "; 
-    if (!this->isAlive()){
-        print+="( " +string(this->getName()) +") ";
+    std::ostringstream oss;
+    oss << "C: ";
+    float x = (this->getLocation().getX());
+    float y = (this->getLocation().getY());
+        if (!this->isAlive()){
+        oss<<"( " <<this->getName()<<") ";
     }
 
     if(this->isAlive())
     {
-    print += string(this->getName()) + "with "+ to_string(this->getHitPoints())+" hit points.";
+    oss<<(this->getName()) << "with "<<(this->getHitPoints())<<" hit points.";
     }
-    print +=" place in point: (" + to_string(this->getLocation().getX()) + "," + to_string(this->getLocation().getY()) + ")\n";
-    return print;
+    oss << " place in point: (" << std::fixed << std::setprecision(2) << x << "," << y << ")\n";
+    return oss.str();
 }

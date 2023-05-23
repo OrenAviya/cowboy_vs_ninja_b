@@ -24,13 +24,13 @@ Point Point:: moveTowards(Point source ,Point destination , double distance){
         return destination;
     
     else{
-        double mul = distance / dis;
+        // move to the closest point to the destination that you can reach
+        double real = distance / dis;
         double delta_x = destination.getX() - source.getX();
         double delta_y = destination.getY() - source.getY();
-        
-        double new_X = source.x + delta_x * mul;
-        double new_Y = source.y + delta_y * mul;
-        return Point(new_X, new_Y);
+        double newX = source.x + delta_x * real;
+        double newY = source.y + delta_y * real;
+        return Point(newX, newY);
     }
 
 } 
