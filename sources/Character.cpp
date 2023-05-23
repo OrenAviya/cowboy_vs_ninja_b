@@ -75,10 +75,11 @@ void Character::hit(int number){
 int Character::getType(){
     return this->type;
 }
-// string Character :: print(){
-//     string print = "some character";
-//     return print;
-// } 
+
+string Character :: print(){
+    string print = "some character";
+    return print;
+} 
 
 /************************************************************************************/
 
@@ -116,18 +117,16 @@ Ninja::Ninja(){}
 
 }
  
-string Ninja::print(){
-    string print = string(this->getName()) + " ";
+string Ninja::print() {
+    string print = "N: "; 
     if (!this->isAlive()){
-        print+="is dead";
-        return print;
+        print+="( " +string(this->getName()) +") ";
     }
 
     if(this->isAlive())
     {
-    print +="with "+ to_string(this->getHitPoints())+" hit points. place in point: ";
-    print += " (" + to_string(this->getLocation().getX()) + "," + to_string(this->getLocation().getY()) + ")\n";
+    print += string(this->getName()) + "with "+ to_string(this->getHitPoints())+" hit points.";
     }
-
+    print +=" place in point: (" + to_string(this->getLocation().getX()) + "," + to_string(this->getLocation().getY()) + ")\n";
     return print;
 }

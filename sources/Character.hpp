@@ -49,7 +49,7 @@ class Character{
         virtual bool isAlive();
         virtual double distance(Character *other);
         virtual void hit(int number);
-        virtual string print() = 0;
+        virtual string print() ;
         virtual ~Character() = default;
         // virtual Character& operator =(Character *some);
 };
