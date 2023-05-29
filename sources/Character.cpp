@@ -121,7 +121,7 @@ Ninja::Ninja(){}
  
 string Ninja::print() {
     std::ostringstream oss;
-    oss << "C: ";
+    oss << "N: ";
     float x = (this->getLocation().getX());
     float y = (this->getLocation().getY());
         if (!this->isAlive()){
